@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
-import BookShelf from './BookShelf'
+import Book from './Book'
 
 class ListBooks extends Component {
 
@@ -9,7 +9,7 @@ class ListBooks extends Component {
   }
 
   render() {
-    const { books } = this.props;
+    const {books, onChangeShelf} = this.props;
 
     return (
       <div className="list-books">
@@ -21,7 +21,7 @@ class ListBooks extends Component {
             <div className="bookshelf">
               <h2 className="bookshelf-title">Currently Reading</h2>
               <div className="bookshelf-books">
-                <BookShelf 
+                <Book 
                   shelf="currentlyReading"
                   books={books} 
                   toggleBookShelf={this.changeShelf}
@@ -32,7 +32,7 @@ class ListBooks extends Component {
             <div className="bookshelf">
               <h2 className="bookshelf-title">Want to Read</h2>
               <div className="bookshelf-books">
-                <BookShelf 
+                <Book 
                   shelf="wantToRead"
                   books={books}
                   toggleBookShelf={this.changeShelf}
@@ -42,7 +42,7 @@ class ListBooks extends Component {
             <div className="bookshelf">
               <h2 className="bookshelf-title">Read</h2>
               <div className="bookshelf-books">
-                <BookShelf 
+                <Book 
                   shelf="read"
                   books={books}
                   toggleBookShelf={this.changeShelf}
