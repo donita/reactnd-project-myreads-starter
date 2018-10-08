@@ -5,7 +5,7 @@ import './App.css'
 import ListBooks from './Components/ListBooks'
 import SearchBooks from './Components/SearchBooks'
 
-class BooksApp extends Component {
+class BooksApp extends React.Component {
   state = {
     books: []
   
