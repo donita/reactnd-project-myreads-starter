@@ -14,24 +14,8 @@ class ListBooks extends Component {
 
     return (
      <div className="list-books">
-       <div className="list-books-title">
          <h1>MyReads</h1>
-       </div>
        <div className="list-books-content">
          {Object.keys(shelves).map((shelf) => 
-           <BookShelf
-                key={ shelf }
-                bookShelf={ bookShelf }
-                onUpdateBook={ onUpdateBook }
-           />
-         )}
-       </div>
-       <div className="open-search">
-         <Link to="/search">Add a book</Link>
-       </div>
-     </div>
-   )
- }
 }
-
 export default ListBooks
