@@ -20,7 +20,7 @@ class Book extends Component {
          onChange={(event) => (
            onChangeShelf(book,event.target.value)
          )}
-         Value={book.shelf ? book.shelf : 'none'}
+         value={book.shelf ? book.shelf : 'none'}
          >
             <option value="move" disabled>Move to...</option>
             <option value="currentlyReading">Currently Reading</option>
