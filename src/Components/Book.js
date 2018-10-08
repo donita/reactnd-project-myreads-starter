@@ -6,6 +6,13 @@ class Book extends Component {
     book: PropTypes.object.isRequired,
     onChangeShelf: PropTypes.func.isRequired
   }
+  
+  onShelfChange = (e) => {
+		e.preventDefault();
+		const {book, onChangeShelf} = this.props;
+		const shelf = e.target.value;
+		onChangeShelf(book, shelf);
+	};
 
 
 
@@ -16,7 +23,7 @@ class Book extends Component {
         <div className="book-top">
           <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${this.props.book.imageLinks.thumbnail})` }}></div>
           <div className="book-shelf-changer">
-              <select onChange={this.onChangeShelf} defaultValue={this.state.books}>
+              <select onChange={this.onShelfChange} defaultValue={book.shelf}>
             <option value="move" disabled>Move to...</option>
             <option value="currentlyReading">Currently Reading</option>
             <option value="wantToRead">Want to Read</option>
