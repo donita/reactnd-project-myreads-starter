@@ -23,14 +23,12 @@ class SearchBooks extends Component {
   }
 
   
-  // Receives a query string and perform and API search
+
   searchBooks = (query) => {
     // Query exists
     if (query) {
       BooksAPI.search(query).then((searchedBooks) => {
-        // Search returns results
         if (searchedBooks.length > 0) {
-          // Filter out searchedBooks that don't have thumbnail and then look for copies of books in the original books prop. If a match exists, take the shelf property of the book from main menu. Else set property to "none"
           searchedBooks = searchedBooks.filter((searchedBook) => searchedBook.imageLinks).map((searchedBook) =>  {
               for (let book of this.props.books) {
                 if(book.id === searchedBook.id) {
