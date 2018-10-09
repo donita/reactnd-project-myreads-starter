@@ -15,65 +15,71 @@ class SearchBooks extends Component {
     results: [],
   }
 
-  searchBooks = (query) => {
-    if (query) {
-      BooksAPI.search(query.trim()).then(books => {
-      if (books) {
-        this.setState({results: this.onChangeShelf(books, this.props.books)})
-      } else {
-        this.setState({results: []})
-      }
-    })
-    } else {
-      this.setState({results: []})
-    }
-  }
-
-
-
 
   updateQuery = (query) => {
-    this.setState({ query: query.trim() })
+    this.setState({ query: query }, () => {
+      this.searchBooks(this.state.query.trim());
+    });
   }
 
+  
+  // Receives a query string and perform and API search
+  searchBooks = (query) => {
+    // Query exists
+    if (query) {
+      BooksAPI.search(query).then((searchedBooks) => {
+        // Search returns results
+        if (searchedBooks.length > 0) {
+          // Filter out searchedBooks that don't have thumbnail and then look for copies of books in the original books prop. If a match exists, take the shelf property of the book from main menu. Else set property to "none"
+          searchedBooks = searchedBooks.filter((searchedBook) => searchedBook.imageLinks).map((searchedBook) =>  {
+              for (let book of this.props.books) {
+                if(book.id === searchedBook.id) {
+                  searchedBook.shelf = book.shelf;
+                  return searchedBook
+                }
+                else {
+                  searchedBook.shelf = 'none';
+                }
+              }
+            return searchedBook;
+          });
+          this.setState({ results: searchedBooks });
+        }
+        else {
+          this.setState({ results: [] });
+        }
+      });
+    }
+    else {
+      this.setState({ results: [] });
+    }
+  }
+  
   render() {
-    const { books, onChangeShelf } = this.props
-    const { query, results } = this.state
+    const { onChangeShelf } = this.props;
+    const { query, results } = this.state;
 
     return (
       <div className="search-books">
         <div className="search-books-bar">
-          <Link
-            className="close-search"
-            to="/"
-          >Close</Link>
+          <Link to="/" className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</Link>
           <div className="search-books-input-wrapper">
-            {/*
-                  NOTES: The search from BooksAPI is limited to a particular set of search terms.
-                  You can find these search terms here:
-                  https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
-                  However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
-                  you don't find a specific author or title. Every search is limited by search terms.
-                */}
-            <input
-              type="text"
+            <input 
+              type="text" 
               placeholder="Search by title or author"
-
-              onChange={(event) => {
-                this.updateQuery(event.target.value)
-                this.searchBooks(event.target.value)
-              }}
+              value={query}
+              onChange={(event) => this.updateQuery(event.target.value)}
             />
           </div>
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            {results.length > 0 && results.map((book) => (
-              <Book
-                key={ book.id }
-                book={ books.find((a) => (a.id === book.id)) ? books.find((a) => (a.id === book.id)) : book }
-                onChangeShelf={ onChangeShelf }
-              />
+            {results.map((book, index) => (
+            <Book 
+              book={book} 
+              key={index} 
+              onChangeShelf={onChangeShelf}
+            />
             ))}
           </ol>
         </div>
