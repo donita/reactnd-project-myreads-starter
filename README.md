@@ -1,14 +1,23 @@
 # My Reads Project
 A simple React app that allows users to organize and track their book list. This is the 6th project apart of the Grow with Google Scholar Nanodegree program at Udacity. A Mockup was provided. 
 
-# How to get the app
+## How to get the app
 Download or clone this repo to your machine
 
-# Install dependencies with npm install OR your favorite package manager's equivalent
+## Install dependencies with npm install OR your favorite package manager's equivalent
 Run npm start in the root directory to start the server and launch the app
 
-# Contributing
-## Fork this repository:
+## Dependencies Used:
+
+create-react-app
+react
+react-dom
+react-scripts
+react-router-dom
+
+
+##Contributing
+Fork this repository:
 
 Click the Fork button in the top right
 
