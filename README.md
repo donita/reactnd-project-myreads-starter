@@ -4,16 +4,16 @@ A simple React app that allows users to organize and track their book list. This
 ## How to Launch App
 Download or clone this repo to your machine
 
-⋅⋅* Install dependencies with npm install OR your favorite package manager's equivalent
-⋅⋅* Run npm start in the root directory to start the server and launch the app
+1.  Install dependencies with npm install OR your favorite package manager's equivalent
+2.  Run npm start in the root directory to start the server and launch the app
 
 ## Dependencies Used:
 
-⋅⋅* create-react-app
-⋅⋅* react
-⋅⋅* react-dom
-⋅⋅* react-scripts
-⋅⋅* react-router-dom
+1.  create-react-app
+2.  react
+3.  react-dom
+4.  react-scripts
+5.  react-router-dom
 
 
 ## Contributing
